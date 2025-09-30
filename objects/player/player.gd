@@ -13,6 +13,7 @@ const THROW_STRENGTH = 10.0
 var ball: Ball
 
 var has_ball: bool = false
+var charging_throw: bool = false
 
 var can_double_jump: bool = false
 
@@ -28,25 +29,46 @@ func _on_hurtbox_touched_ball(ball: Hitbox) -> void:
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 	
-	if Input.is_action_just_released("attack"):
-		_handle_attack()
+	_handle_attack(delta)
 
-func _handle_attack() -> void:
-	if has_ball:
-		_throw_ball()
-	elif is_on_floor():
-		has_ball = true
-		ball.queue_free()
+func _handle_attack(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+		if has_ball:
+			if is_on_floor():
+				charging_throw = true
+			else:
+				_throw_ball_air()
+		elif ball:
+			has_ball = true
+			ball.queue_free()
 
-func _throw_ball() -> void:
+	
+	if Input.is_action_just_released("attack") and charging_throw:
+		charging_throw = false
+		_throw_ball("forward")
+	
+	if Input.is_action_just_pressed("jump") and charging_throw:
+		charging_throw = false
+		_throw_ball("down")
+
+func _throw_ball(direction: String) -> void:
 	has_ball = false
 	pickup_timer.start()
 	ball = ball_scene.instantiate()
 	ball.position = position
+	ball.position.y -= 0.3
 	
-	# -global_basis.z is the forward direction, like Vector3.FORWARD
-	ball.linear_velocity = -camera.global_basis.z * THROW_STRENGTH
+	if direction == "forward":
+		# -global_basis.z is the forward direction, like Vector3.FORWARD
+		ball.linear_velocity = -camera.global_basis.z * THROW_STRENGTH
+	if direction == "down":
+		ball.linear_velocity = velocity * 1.4
+		ball.linear_velocity.y = -THROW_STRENGTH
+	
 	get_tree().current_scene.add_child(ball)
+
+func _throw_ball_air() -> void:
+	print("air throw!")
 
 func _handle_movement(delta: float) -> void:
 	# double jump is granted elsewhere
