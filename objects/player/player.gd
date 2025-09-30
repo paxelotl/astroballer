@@ -25,6 +25,19 @@ func _on_hurtbox_touched_ball(ball: Hitbox) -> void:
 	has_ball = true
 	ball.notify_player_touched(self)
 
+func _physics_process(delta: float) -> void:
+	_handle_movement(delta)
+	
+	if Input.is_action_just_released("attack"):
+		_handle_attack()
+
+func _handle_attack() -> void:
+	if has_ball:
+		_throw_ball()
+	elif is_on_floor():
+		has_ball = true
+		ball.queue_free()
+
 func _throw_ball() -> void:
 	has_ball = false
 	pickup_timer.start()
@@ -66,9 +79,3 @@ func _handle_jump() -> void:
 			if overlap is BallHitbox:
 				_on_hurtbox_touched_ball(overlap)
 				velocity.y = JUMP_VELOCITY
-
-func _physics_process(delta: float) -> void:
-	_handle_movement(delta)
-	
-	if Input.is_action_just_released("attack") and has_ball:
-		_throw_ball()
