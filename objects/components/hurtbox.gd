@@ -11,5 +11,5 @@ func _ready():
 
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox != null:
-		if hitbox is BallHitbox and pickup_timer.is_stopped():
+		if hitbox is BallHitbox and pickup_timer.is_stopped() and player.is_on_floor():
 			touched_ball.emit(hitbox)

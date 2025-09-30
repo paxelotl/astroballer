@@ -43,8 +43,8 @@ func _handle_movement(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or can_double_jump):
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		_handle_jump()
 	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction: Vector3 = (neck.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -56,6 +56,16 @@ func _handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED * 2 * delta)
 	
 	move_and_slide()
+
+func _handle_jump() -> void:
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	else:
+		var overlaps = $Hurtbox.get_overlapping_areas()
+		for overlap in overlaps:
+			if overlap is BallHitbox:
+				_on_hurtbox_touched_ball(overlap)
+				velocity.y = JUMP_VELOCITY
 
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
