@@ -14,11 +14,16 @@ var ball: Ball
 
 var has_ball: bool = false
 
+var can_double_jump: bool = false
+
 func _ready() -> void:
 	$Hurtbox.connect("touched_ball", _on_hurtbox_touched_ball)
 
-func _on_hurtbox_touched_ball(damage: int) -> void:
+func _on_hurtbox_touched_ball(ball: Hitbox) -> void:
+	if not is_on_floor():
+		can_double_jump = true
 	has_ball = true
+	ball.notify_player_touched(self)
 
 func _throw_ball() -> void:
 	has_ball = false
@@ -31,10 +36,14 @@ func _throw_ball() -> void:
 	get_tree().current_scene.add_child(ball)
 
 func _handle_movement(delta: float) -> void:
+	# double jump is granted elsewhere
+	if is_on_floor():
+		can_double_jump = false
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or can_double_jump):
 		velocity.y = JUMP_VELOCITY
 	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -51,5 +60,5 @@ func _handle_movement(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 	
-	if Input.is_action_just_pressed("attack") and has_ball:
+	if Input.is_action_just_released("attack") and has_ball:
 		_throw_ball()
