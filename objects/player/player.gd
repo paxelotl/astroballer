@@ -4,6 +4,8 @@ extends CharacterBody3D
 @onready var neck = $Neck
 @onready var camera = $Neck/Camera
 @onready var pickup_timer = $PickupTimer
+@onready var ui = $Neck/UIElements
+@onready var ui_elements = ui.get_children()
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -20,18 +22,20 @@ var can_double_jump: bool = false
 func _ready() -> void:
 	$Hurtbox.connect("touched_ball", _on_hurtbox_touched_ball)
 
-func _on_hurtbox_touched_ball(ball: Hitbox) -> void:
+func _on_hurtbox_touched_ball(ball_hitbox: Hitbox) -> void:
 	if not is_on_floor():
 		can_double_jump = true
 	has_ball = true
-	ball.notify_player_touched(self)
+	ball_hitbox.notify_player_touched(self)
 
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 	
 	_handle_attack(delta)
+	
+	_handle_ui()
 
-func _handle_attack(delta: float) -> void:
+func _handle_attack(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		if has_ball:
 			if is_on_floor():
@@ -101,3 +105,8 @@ func _handle_jump() -> void:
 			if overlap is BallHitbox:
 				_on_hurtbox_touched_ball(overlap)
 				velocity.y = JUMP_VELOCITY
+
+func _handle_ui() -> void:
+	for element in ui_elements:
+		if element.name == "Charge":
+			element.visible = charging_throw

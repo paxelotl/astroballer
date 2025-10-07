@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b5bwfgjph0iu"]
+[gd_scene load_steps=9 format=3 uid="uid://b5bwfgjph0iu"]
 
 [ext_resource type="Script" uid="uid://clm1y20qahg38" path="res://objects/player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cvyoi104bgjso" path="res://objects/player/mouse_and_look.gd" id="2_g7ett"]
 [ext_resource type="PackedScene" uid="uid://cmnn6bhkgfyni" path="res://objects/ball/ball.tscn" id="2_jnjyq"]
 [ext_resource type="Script" uid="uid://bflr81w8vnq6" path="res://objects/components/hurtbox.gd" id="3_ssrue"]
+[ext_resource type="Texture2D" uid="uid://cmvu5jqsg4odn" path="res://objects/player/charge.png" id="4_gnkmh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6cvhb"]
 
@@ -30,6 +31,15 @@ script = ExtResource("2_g7ett")
 
 [node name="Camera" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.09791, 1.90775)
+
+[node name="UIElements" type="Node3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.614653, 0)
+
+[node name="Charge" type="Sprite3D" parent="Neck/UIElements"]
+transform = Transform3D(0.37900275, 0, 0, 0, 0.37900275, 0, 0, 0, 0.37900275, 0.898589, 0.727437, 0)
+billboard = 1
+double_sided = false
+texture = ExtResource("4_gnkmh")
 
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_layer = 0
