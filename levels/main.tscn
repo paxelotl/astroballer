@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdc5qwdci0mwy"]
+[gd_scene load_steps=12 format=3 uid="uid://bdc5qwdci0mwy"]
 
 [ext_resource type="PackedScene" uid="uid://b5bwfgjph0iu" path="res://objects/player/player.tscn" id="1_qjtup"]
 [ext_resource type="PackedScene" uid="uid://cmnn6bhkgfyni" path="res://objects/ball/ball.tscn" id="2_wdj6m"]
 [ext_resource type="Material" uid="uid://bwevrd0k7rogl" path="res://objects/placeholder.tres" id="3_l8qe7"]
+[ext_resource type="PackedScene" uid="uid://ie3yqikap1nn" path="res://objects/npcs/npc.tscn" id="4_m1504"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qjtup"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -142,3 +143,6 @@ surface_material_override/0 = ExtResource("3_l8qe7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/MeshInstance3D5/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_l8qe7")
+
+[node name="Npc" parent="." instance=ExtResource("4_m1504")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9801884, 1.3022249, -5.1994963)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ie3yqikap1nn"]
+
+[ext_resource type="Script" uid="uid://itttlmej6kmf" path="res://objects/npcs/npc_interactable_area.gd" id="1_ilfy4"]
+[ext_resource type="Script" uid="uid://lmofow53logl" path="res://objects/npcs/npc.gd" id="1_ob1xc"]
+[ext_resource type="Resource" uid="uid://b513vxxeggja3" path="res://objects/npcs/npc_dialogue.tres" id="2_u6y7b"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rfies"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ilfy4"]
+size = Vector3(1, 2, 1)
+
+[node name="Npc" type="Node3D"]
+script = ExtResource("1_ob1xc")
+dialogue = ExtResource("2_u6y7b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_rfies")
+
+[node name="InteractableArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_ilfy4")
+metadata/_custom_type_script = "uid://itttlmej6kmf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableArea"]
+shape = SubResource("BoxShape3D_ilfy4")
+
+[node name="TextBox" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3262007, 0)
+billboard = 1
+double_sided = false
+text = "ggggggggg"

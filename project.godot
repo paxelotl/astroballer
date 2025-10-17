@@ -83,6 +83,8 @@ alt={
 3d_physics/layer_2="Dynamic"
 3d_physics/layer_3="Player"
 3d_physics/layer_4="Ball"
+3d_physics/layer_5="Npc"
+3d_physics/layer_6="Enemy"
 
 [rendering]
 

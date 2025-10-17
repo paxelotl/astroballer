@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var camera = $Camera
-@onready var mouse_on_window: bool = false
+@onready var mouse_on_window: bool = true
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -15,8 +15,10 @@ func _physics_process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		match event.button_index:
+			MouseButton.MOUSE_BUTTON_LEFT:
+				if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+					Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	var mouse_movement: Vector2 = Vector2.ZERO
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://b513vxxeggja3"]
+
+[ext_resource type="Script" uid="uid://ou7trgjjit4u" path="res://objects/npcs/dialogue.gd" id="1_ygkvn"]
+
+[resource]
+script = ExtResource("1_ygkvn")
+dialogue = Array[String](["Yo", "Wanna hang?", "Aight"])
+metadata/_custom_type_script = "uid://ou7trgjjit4u"

@@ -17,16 +17,14 @@ var ball: Ball
 var has_ball: bool = false
 var charging_throw: bool = false
 
-var can_double_jump: bool = false
-
 func _ready() -> void:
 	$Hurtbox.connect("touched_ball", _on_hurtbox_touched_ball)
+	$Hurtbox.connect("touched_npc", func (npc): npc.notify_player_touched(self))
 
 func _on_hurtbox_touched_ball(ball_hitbox: Hitbox) -> void:
-	if not is_on_floor():
-		can_double_jump = true
-	has_ball = true
-	ball_hitbox.notify_player_touched(self)
+	if is_on_floor() and pickup_timer.is_stopped():
+		has_ball = true
+		ball_hitbox.notify_player_touched(self)
 
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
@@ -46,7 +44,6 @@ func _handle_attack(_delta: float) -> void:
 			has_ball = true
 			ball.queue_free()
 
-	
 	if Input.is_action_just_released("attack") and charging_throw:
 		charging_throw = false
 		_throw_ball("forward")
@@ -74,11 +71,11 @@ func _throw_ball(direction: String) -> void:
 func _throw_ball_air() -> void:
 	print("air throw!")
 
+func _pick_up_ball(ball_hitbox: BallHitbox) -> void:
+	has_ball = true
+	ball_hitbox.notify_player_touched(self)
+
 func _handle_movement(delta: float) -> void:
-	# double jump is granted elsewhere
-	if is_on_floor():
-		can_double_jump = false
-	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -103,10 +100,14 @@ func _handle_jump() -> void:
 		var overlaps = $Hurtbox.get_overlapping_areas()
 		for overlap in overlaps:
 			if overlap is BallHitbox:
-				_on_hurtbox_touched_ball(overlap)
+				# double jump and pick up
+				_pick_up_ball(overlap)
 				velocity.y = JUMP_VELOCITY
 
 func _handle_ui() -> void:
 	for element in ui_elements:
 		if element.name == "Charge":
 			element.visible = charging_throw
+
+func printd():
+	print("AHHHHHHH NPC TOUCHED")
