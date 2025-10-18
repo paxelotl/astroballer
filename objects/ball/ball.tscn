@@ -19,7 +19,7 @@ points = PackedVector3Array(-0.59932, -0.028661, 0, -0.596505, -0.028661, 0.0586
 [sub_resource type="SphereShape3D" id="SphereShape3D_7601y"]
 radius = 0.7
 
-[node name="Ball" type="RigidBody3D"]
+[node name="Ball" type="RigidBody3D" groups=["ball"]]
 collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_1f4pl")
 script = ExtResource("1_etdk3")

@@ -5,7 +5,6 @@ var current_dialogue: int = 0
 var interactable: bool = false
 
 func _ready() -> void:
-	add_to_group("npcs")
 	$InteractableArea.connect("player_touched", _on_player_touched)
 	$InteractableArea.connect("interacted", _on_interacted)
 

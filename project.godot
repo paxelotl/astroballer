@@ -24,6 +24,11 @@ display_server/driver.linuxbsd="wayland"
 
 project/assembly_name="Astroballer"
 
+[global_group]
+
+npcs=""
+ball=""
+
 [input]
 
 move_forward={

@@ -158,3 +158,5 @@ surface_material_override/0 = ExtResource("3_l8qe7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/MeshInstance3D5/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_l8qe7")
+
+[editable path="Player"]

@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ilfy4"]
 size = Vector3(1, 2, 1)
 
-[node name="Npc" type="Node3D"]
+[node name="Npc" type="Node3D" groups=["npcs"]]
 script = ExtResource("1_ob1xc")
 dialogue = ExtResource("2_u6y7b")
 
