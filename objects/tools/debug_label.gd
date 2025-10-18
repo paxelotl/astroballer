@@ -12,7 +12,14 @@ func resolve_path(node: Node, path: String):
 		current_object = current_object[part]
 	return current_object
 
+func _world_to_screen():
+	var camera = get_viewport().get_camera_3d()
+	var screen_position = camera.unproject_position(target.global_position)
+	position = screen_position
+
 func _physics_process(_delta: float) -> void:
+	_world_to_screen()
+	
 	var prop_val = resolve_path(target, target_path)
 	if prop_val == null:
 		return
