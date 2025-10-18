@@ -7,7 +7,7 @@ var closest_npc: Node
 func _physics_process(_delta: float) -> void:
 	_handle_npcs()
 	
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("interact"):
 		closest_npc.progress_dialogue()
 
 func _handle_npcs() -> void:
