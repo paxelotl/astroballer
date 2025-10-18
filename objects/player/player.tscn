@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5bwfgjph0iu"]
+[gd_scene load_steps=10 format=3 uid="uid://b5bwfgjph0iu"]
 
 [ext_resource type="Script" uid="uid://clm1y20qahg38" path="res://objects/player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cvyoi104bgjso" path="res://objects/player/mouse_and_look.gd" id="2_g7ett"]
 [ext_resource type="PackedScene" uid="uid://cmnn6bhkgfyni" path="res://objects/ball/ball.tscn" id="2_jnjyq"]
 [ext_resource type="Script" uid="uid://bflr81w8vnq6" path="res://objects/components/hurtbox.gd" id="3_ssrue"]
 [ext_resource type="Texture2D" uid="uid://cmvu5jqsg4odn" path="res://objects/player/charge.png" id="4_gnkmh"]
+[ext_resource type="Script" uid="uid://bybe5orgad8xe" path="res://objects/player/interactor.gd" id="6_xkryw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6cvhb"]
 
@@ -54,3 +55,6 @@ shape = SubResource("BoxShape3D_g7ett")
 process_callback = 0
 one_shot = true
 autostart = true
+
+[node name="Interactor" type="Node3D" parent="."]
+script = ExtResource("6_xkryw")

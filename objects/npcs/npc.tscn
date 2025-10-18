@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ie3yqikap1nn"]
+[gd_scene load_steps=7 format=3 uid="uid://ie3yqikap1nn"]
 
 [ext_resource type="Script" uid="uid://itttlmej6kmf" path="res://objects/npcs/npc_interactable_area.gd" id="1_ilfy4"]
 [ext_resource type="Script" uid="uid://lmofow53logl" path="res://objects/npcs/npc.gd" id="1_ob1xc"]
 [ext_resource type="Resource" uid="uid://b513vxxeggja3" path="res://objects/npcs/npc_dialogue.tres" id="2_u6y7b"]
+[ext_resource type="Texture2D" uid="uid://cmvu5jqsg4odn" path="res://objects/player/charge.png" id="4_rakwf"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rfies"]
 
@@ -30,3 +31,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3262007, 0)
 billboard = 1
 double_sided = false
 text = "ggggggggg"
+
+[node name="Vfx" type="Node3D" parent="."]
+
+[node name="Interactable" type="Sprite3D" parent="Vfx"]
+transform = Transform3D(0.37900275, 0, 0, 0, 0.37900275, 0, 0, 0, 0.37900275, -0.9, 1.269, 0)
+billboard = 1
+double_sided = false
+texture = ExtResource("4_rakwf")
