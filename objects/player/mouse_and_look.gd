@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var camera = $Camera
+@onready var camera_pivot = $CameraPivot
 @onready var mouse_on_window: bool = true
 
 func _ready() -> void:
@@ -26,8 +26,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# Neck must rotate y and Camera must rotate x
 	rotation.y -= mouse_movement.x * 0.01
-	camera.rotation.x -= mouse_movement.y * 0.01
-	camera.rotation.x = clampf(camera.rotation.x, -PI / 2, PI / 2)
+	camera_pivot.rotation.x -= mouse_movement.y * 0.01
+	camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, -PI / 2, PI / 2)
 
 func _notification(what: int) -> void:
 	match what:

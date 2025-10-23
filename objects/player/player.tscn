@@ -30,8 +30,10 @@ shape = SubResource("ConvexPolygonShape3D_qjtup")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.614653, 0)
 script = ExtResource("2_g7ett")
 
-[node name="Camera" type="Camera3D" parent="Neck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 1.09791, 1.90775)
+[node name="CameraPivot" type="Node3D" parent="Neck"]
+
+[node name="Camera" type="Camera3D" parent="Neck/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 3.4)
 
 [node name="UIElements" type="Node3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.614653, 0)

@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @onready var neck = $Neck
-@onready var camera = $Neck/Camera
+@onready var camera = $Neck/CameraPivot/Camera
 @onready var pickup_timer = $PickupTimer
 @onready var ui = $Neck/UIElements
 @onready var ui_elements = ui.get_children()
