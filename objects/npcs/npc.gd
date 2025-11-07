@@ -14,7 +14,7 @@ func _physics_process(_delta: float) -> void:
 
 func progress_dialogue() -> void:
 	if interactable:
-		if current_dialogue < dialogue.dialogue.size() and interactable:
+		if current_dialogue < dialogue.dialogue.size():
 			$TextBox.text = dialogue.dialogue[current_dialogue]
 			current_dialogue += 1
 		else:
