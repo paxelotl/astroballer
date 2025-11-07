@@ -88,8 +88,12 @@ func _handle_movement(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * 2 * delta)
-		velocity.z = move_toward(velocity.z, 0, SPEED * 2 * delta)
+		var xz: Vector2
+		xz.x = velocity.x
+		xz.y = velocity.z
+		xz = xz.move_toward(Vector2.ZERO, SPEED * 2 * delta)
+		velocity.x = xz.x
+		velocity.z = xz.y
 	
 	move_and_slide()
 
