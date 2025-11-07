@@ -13,9 +13,12 @@ func _physics_process(_delta: float) -> void:
 	$Vfx.look_at(get_viewport().get_camera_3d().global_position)
 
 func progress_dialogue() -> void:
-	if dialogue.dialogue.size() > current_dialogue and interactable:
-		$TextBox.text = dialogue.dialogue[current_dialogue]
-		current_dialogue += 1
+	if interactable:
+		if current_dialogue < dialogue.dialogue.size() and interactable:
+			$TextBox.text = dialogue.dialogue[current_dialogue]
+			current_dialogue += 1
+		else:
+			$TextBox.text = ""
 
 func _on_player_touched(player: Player) -> void:
 	player.printd()
